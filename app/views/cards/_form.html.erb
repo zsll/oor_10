@@ -1,0 +1,37 @@
+<%= form_for @card, :html => { :multipart => true } do |f| %>
+  <% if @card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+
+      <ul>
+      <% @card.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :uploads do |u| %>
+    <% if u.object.new_record? %>
+      	New Files: <%= u.file_field :pic %>
+    <% end %>
+  <% end %>
+	
+  <h4>Old Files</h4>
+
+  <%= f.fields_for :uploads do |u| %>			
+		
+    <% unless u.object.new_record? %>
+      <div class="small">
+        <%= link_to image_tag(u.object.pic.url(:small)), u.object.pic.url(:large) %>
+        Delete?<%= u.check_box :_destroy %>			
+      </div>	
+    <% end %>
+	
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
+
+
+

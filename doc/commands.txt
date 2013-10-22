@@ -1,0 +1,59 @@
+gem install rmagick -v '2.13.2'
+
+If you saw such error:
+Can't install RMagick 2.13.2. Can't find MagickWand.h.
+
+convert --version
+Version: ImageMagick 6.7.8-8 2012-08-09 Q16 http://www.imagemagick.org
+Copyright: Copyright (C) 1999-2012 ImageMagick Studio LLC
+Features: OpenMP OpenCL
+
+
+Then do find:
+mdfind MagickCore.pc
+
+/opt/ImageMagick/share/doc/ImageMagick-6.7.8/www/changelog.html
+/opt/ImageMagick/share/doc/ImageMagick-6.7.8/ChangeLog
+/opt/ImageMagick/lib/pkgconfig/MagickCore.pc
+
+Then in .bash_profile:
+export PKG_CONFIG_PATH="/opt/ImageMagick/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+
+http://stackoverflow.com/questions/13942443/error-installing-rmagick-on-mountain-lion
+Then if you see this:
+Can't install RMagick 2.13.1. Can't find the ImageMagick library or one of the dependent libraries. Check the mkmf.log file for more detailed information.
+checking for InitializeMagick() in -lMagickCore... no
+checking for InitializeMagick() in -lMagick... no
+checking for InitializeMagick() in -lMagick++... no
+
+just use 2.13.2
+
+
+http://stackoverflow.com/questions/7319445/rmagick-leads-to-server-shutdown
+
+
+
+
+
+
+
+FORGET ALL ABOVE. TRY DON'T MESS WITH RMAGICK. Start from here
+
+
+rake db:create
+rails g model upload （
+t.references :uploadable, :polymorphic => true，into migration to get uploadable_id:integer uploadable_type)
+rails generate paperclip upload pic
+rails g scaffold card (greeting:text address:hstore template_id:integer status)
+
+
+Add single line to 'application.css':
+
+
+
+# Add the fonts path
+config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+# Precompile additional assets
+config.assets.precompile += %w( .svg .eot .woff .ttf )
