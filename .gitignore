@@ -13,3 +13,12 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore environment variables
+/config/application.yml
+
+# Ignore commands
+/doc/*.txt
+
+# Ignore paplerclip files
+/public/system/*
