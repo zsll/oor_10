@@ -33,7 +33,11 @@ just use 2.13.2
 http://stackoverflow.com/questions/7319445/rmagick-leads-to-server-shutdown
 
 
-
+brew uninstall imagemagick
+brew remove imagemagick
+rm -rf `brew --cache imagemagick`
+brew install -f imagemagick --disable-openmp
+gem pristine rmagick
 
 
 
@@ -47,6 +51,31 @@ t.references :uploadable, :polymorphic => true，into migration to get uploadabl
 rails generate paperclip upload pic
 rails g scaffold card (greeting:text address:hstore template_id:integer status)
 
+
+heroku create
+git init
+git add .
+git commit -a -m 'init commit'
+git push git@heroku.com:dry-wildwood-2977.git master
+heroku run rake db:migrate
+git commit -a -m 'config.assets.compile = true'
+heroku logs --tail --app dry-wildwood-2977
+
+
+
+
+
+ActionView::Template::Error (undefined method `asset_url' for #<#<Class:0x007f93b38e1810>:0x007f93b3f98348>
+  (in /usr/local/rvm/gems/ruby-1.9.3-p194/gems/jcrop-rails-v2-0.9.12.2/app/assets/stylesheets/jquery.Jcrop.css.erb)):
+    1: <%= stylesheet_link_tag 'jquery.Jcrop' %>
+    2: <%= javascript_include_tag 'jquery.Jcrop' %>
+    3: 
+    4: <script type="text/javascript" charset="utf-8">
+  app/views/cards/crop.html.erb:1:in `_app_views_cards_crop_html_erb___2828885222921879906_70136159677040'
+  app/controllers/cards_controller.rb:65:in `block (2 levels) in update'
+  app/controllers/cards_controller.rb:63:in `update'
+
+  background: #ffffff url(<%= asset_url("Jcrop.gif") %>); does not work in /usr/local/rvm/gems/ruby-1.9.3-p194/gems/jcrop-rails-v2-0.9.12.2/app/assets/stylesheets/jquery.Jcrop.css.erb
 
 
 
