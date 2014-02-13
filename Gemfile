@@ -8,7 +8,6 @@ gem 'rails', '3.2.13'
 gem 'jcrop-rails-v2', '~> 0.9.12.2'
 gem "paperclip", "~> 3.0"
 gem "mini_magick", "~> 3.4"
-gem 'aws-sdk', '~> 1.5.7'
 gem 'pg'
 
 
