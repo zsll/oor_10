@@ -4,8 +4,6 @@ class Upload < ActiveRecord::Base
   validates_attachment_content_type :pic, :content_type => ['image/jpeg', 'image/png', 'image/gif']
   attr_accessible :uploadable_id, :uploadable_type, :pic, :crop_x, :crop_y, :crop_w, :crop_h
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
-  #after_update :reprocess_pic, :if => :cropping?
   
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

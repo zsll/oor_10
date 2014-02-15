@@ -60,23 +60,18 @@ class CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
     
-    params[:card][:uploads_attributes].each do |key, u|
-      if(u[:id] && u[:crop_x] && u[:crop_y] && u[:crop_w] && u[:crop_h])
-        old_upload = Upload.find(u[:id].gsub(/\D/, '').to_i)
-        if(old_upload && old_upload.crop_x != u[:crop_x] && 
-          old_upload.crop_y != u[:crop_y] && 
-          old_upload.crop_w != u[:crop_w] && 
-          old_upload.crop_h != u[:crop_h])
-          if(old_upload.update_attributes(u))
-            old_upload.reprocess_pic
-          end
-        end
-      end
-    end
-    
     respond_to do |format|
       if @card.update_attributes(params[:card])
-        
+        params[:card][:uploads_attributes].each do |key, u|
+          if(u[:id] && u[:crop_x] && u[:crop_y] && u[:crop_w] && u[:crop_h])
+            old_upload = Upload.find(u[:id].gsub(/\D/, '').to_i)
+            if(old_upload)
+              if(old_upload.update_attributes(u))
+                old_upload.reprocess_pic
+              end
+            end
+          end
+        end
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
         format.json { head :no_content }
       else
